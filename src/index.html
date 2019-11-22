@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Return to the Moon - A js 13k Lunar Lander game for 2019</title>
 	<meta charset="utf-8">
 	<meta name="description" content="game for js13k 2019">
 	<meta name="author" content="Luke Nickerson">
 	<link rel="stylesheet" href="moon.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body scroll="no">
 
@@ -17,38 +18,55 @@
 		680 400, 780 0, 800 0, 700 400,
 		800 450, 800 600" /> -->
 </svg>
-<dl class="info-left">
+<dl class="info info-left">
 	<dt>FUEL</dt><dd class="fuel"></dd><br>
+	<dt>MASS</dt><dd class="mass"></dd><br>
 	<dt>INTEGRITY</dt><dd class="health"></dd>
 </dl>
-<dl class="info-right">
+<dl class="info info-right">
 	<dt>ALTITUDE</dt><dd class="altitude"></dd><br>
 	<dt>HORIZONTAL VELOCITY</dt><dd class="speedX"></dd><br>
 	<dt>VERTICAL VELOCITY</dt><dd class="speedY"></dd>
 </dl>
-<b class="intro">
+<aside class="intro">
 	<h1>Return to the Moon</h1>
+	<span class="subtitle">
+		A Lunar Lander Game in <abbr title="Less than 13 kilobytes, zipped">&lt;13k</abbr>, v1.1
+	</span>
 	<p>
-	In 1969, 50 years ago, humans first landed on the moon.
-	That very same year the first lunar lander game was made, which ended up spawning a popular genre of games.
+	In 1969, 50 years ago, <a href="https://www.youtube.com/watch?v=S9HdPi9Ikhk" target="_blank" title="Open video of Apollo 11 moonwalk in new tab">humans first landed on the moon</a>.
+	That very same year the first lunar lander game was made, which ended up spawning
+	<a href="https://en.wikipedia.org/wiki/Lunar_Lander_(video_game_genre)" target="_blank" title="Open wikipedia entry about Lunar Lander genre in new tab">a popular genre of games</a>.
 	This game is a tribute to both achievements.
 	</p>
 	<p>
-	You are headed BACK to the moon. Your only goal is to land very softly on the moon.
+	You are headed back to the moon. Your only goal is to land very softly on the moon.
 	</p>
-	A,D,Left,Right = Rotate ... W,Up = Thrust ... v1.0
-	<p>PRESS UP or W TO BEGIN</p>
-</b>
-<b class="failure">You landed too hard and wrecked the lander. You'll never get back to Earth now.<br>Refresh the page to try again.</b>
-<b class="win">Success!<br>Refresh the page to try again.</b>
+	<dl class="controls">
+		<dt>Rotate</dt><dd>A, D, Left, Right Arrows</dd><br>
+		<dt>Thrust</dt><dd>W, Up Arrow, Click</dd><br>
+		<dt>Zoom</dt><dd>-, +, ], [, Mouse Wheel</dd><br>
+		<dt>Restart</dt><dd>Enter</dd><br>
+		<dt>BEGIN</dt><dd>Enter, Up, W</dd>
+	</dl>
+</aside>
+<aside class="failure">You landed too hard and wrecked the lander. You'll never get back to Earth now.<br>Press Enter or refresh the page to try again.</aside>
+<aside class="win">Success!<br>Press Enter or refresh the page to try again.</aside>
 
-
-<script src="scripts/Polygon.js"></script>
-<script src="scripts/CompositePolygon.js"></script>
-<script src="scripts/Ship.js"></script>
-<script src="scripts/Input.js"></script>
-<script src="scripts/physics.js"></script>
-<script src="scripts/lunar-lander.js"></script>
+<script src="scripts/XY.js" type="module"></script>
+<script src="scripts/Polygon.js" type="module"></script>
+<script src="scripts/CompositePolygon.js" type="module"></script>
+<script src="scripts/Ship.js" type="module"></script>
+<script src="scripts/Input.js" type="module"></script>
+<script src="scripts/physics.js" type="module"></script>
+<script src="scripts/decayer.js" type="module"></script>
+<script src="scripts/Loop.js" type="module"></script>
+<script src="scripts/Particle.js" type="module"></script>
+<script src="scripts/lunar-lander.js" type="module"></script>
+<!-- <script type="module">
+	import game from './scripts/lunar-lander.js';
+	window.g = game;
+</script> -->
 
 </body>
 </html>

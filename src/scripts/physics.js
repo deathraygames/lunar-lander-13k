@@ -1,60 +1,38 @@
+import XY from './XY.js';
 
-const BIG_G_DEFAULT = 50.1;
+const BIG_G_DEFAULT = 5.;
 const MIN_GRAVITY_RADIUS = 1;
-
-class XY {
-	constructor(x = 0, y = 0) {
-		this.x = x;
-		this.y = y;
-	}
-	add({x, y}) {
-		this.x += x || 0;
-		this.y += y || 0;
-		return this;
-	}
-	multiply(m) {
-		this.x *= m || 1;
-		this.y *= m || 1;
-		return this;
-	}
-	getDistance({x, y}) {
-		return Math.sqrt( Math.pow((this.x - x), 2) + Math.pow((this.y - y), 2) );
-	}
-	getUnitVector(xy){
-		let {x,y} = xy;
-		const d = Math.abs(this.getDistance(xy));
-		const dx = x - this.x;
-		const dy = y - this.y;
-		x = dx / d;
-		y = dy / d;
-		return new XY(x, y);
-	}
-	getMagnitude() {
-		return Math.sqrt( Math.pow(this.x, 2) + Math.pow(this.y, 2)	);
-	}
-	getMultiply(m) {
-		return new XY(this.x * m, this.y * m);
-	}
-	clone() {
-		return new XY(this.x, this.y);
-	}
-	clear() {
-		this.x = 0;
-		this.y = 0;
-	}
-}
 
 function physics(objects, t) {
 	// Loop through objects, apply gravity
 	objects.forEach((obj) => {
-		obj.collide(objects);
-		obj.gravitate(t, objects);
-		obj.move(t);
+		if (!(obj.pos instanceof XY)) { return; }
+		if (obj.collide) {
+			obj.collide(objects);
+		}
+		if (obj.gravitate) {
+			obj.gravitate(t, objects);
+		}
+		if (obj.move) {
+			obj.move(t);
+		}
 		// obj.y += 0.01 * t;
 	});
 }
 
+physics.getOrbitalVelocity = function (smallObject, bigObject, left = false, bigG = BIG_G_DEFAULT) {
+	// const m = smallObject.mass;
+	const M = bigObject.mass;
+	const r = smallObject.pos.getDistance(bigObject.pos);
+	const speed = Math.sqrt( bigG * M / r );
+	const unit = smallObject.pos.getUnitVector(bigObject.pos);
+	const v = unit.getPerpendicularVector(left).multiply(speed);
+	console.log(arguments, M, r, speed, unit, v);
+	return v;
+};
+
 physics.canCollide = (o) => ({
+	colliding: [],
 	collide(objs) {
 		const innerRadius = (typeof o.innerRadius === 'number') ? o.innerRadius : 0;
 		o.isColliding = false;
@@ -65,17 +43,17 @@ physics.canCollide = (o) => ({
 			const push = pushee.pos.getUnitVector(pusher.pos).multiply(amount);
 			pushee.pos.add(push);
 		};
-		const doDamage = (m) => {
+		const doDamage = (m, objHit) => {
 			if (m < 1) { return; }
 			// (trial and error damage)
 			const velocityDamage = Math.ceil(Math.pow(m, 1.4) / 10);
 			// console.log('Damage', m, '-->', velocityDamage);
 			if (o.damage) {
-				o.damage(velocityDamage);
+				o.damage(velocityDamage, objHit);
 			}
 		};
 		objs.forEach((b) => {
-			if (o === b) {
+			if (o === b || !(b.pos instanceof XY && b.vel instanceof XY)) {
 				return false;
 			}
 			const r = o.pos.getDistance(b.pos);
@@ -95,7 +73,7 @@ physics.canCollide = (o) => ({
 			// Damage
 			const relativeVelocity = o.vel.clone().add(b.vel);
 			const velocityMag = relativeVelocity.getMagnitude();
-			doDamage(velocityMag);
+			doDamage(velocityMag, b);
 			return true;
 		});
 		o.isColliding = o.colliding.length > 0;
@@ -106,6 +84,10 @@ physics.canCollide = (o) => ({
 });
 
 physics.canMove = (o) => ({
+	pos: new XY(),
+	force: new XY(),
+	acc: new XY(),
+	vel: new XY(),
 	move(t) {
 		const forceAcc = new XY((o.force.x / o.mass), (o.force.y / o.mass));
 		o.acc.add(forceAcc);
@@ -134,6 +116,7 @@ physics.canGravitate = (o, bigG = BIG_G_DEFAULT) => ({
 			b === o // can't get gravity from self
 			|| b.mass === 0 || o.mass === 0 // things without mass don't make gravity
 			|| o.isColliding // collisions cancel gravity with normal force
+			|| !(b.pos instanceof XY)
 		) {
 			return false;
 		}
@@ -164,17 +147,17 @@ physics.physical = (o) => {
 		o,
 		{
 			mass: 1,
-			pos: new XY(),
-			force: new XY(),
-			acc: new XY(),
-			vel: new XY(),
-			colliding: [],
+			// pos: new XY(),
+			// force: new XY(),
+			// acc: new XY(),
+			// vel: new XY(),
+			// colliding: [],
 		},
 		physics.canCollide(o),
 		physics.canMove(o),
 		physics.canGravitate(o, BIG_G_DEFAULT),
 	);
 	return o;
-	// TODO: add velocity, acceleration, etc.
-	// TODO: add mass, etc.
 };
+
+export default physics;

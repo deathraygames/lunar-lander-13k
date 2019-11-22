@@ -6,14 +6,25 @@ A lunar-lander clone game for js13k
 * [JS13k Rules](http://2019.js13kgames.com/#rules): Make a game with a package size less than 13k (13,312 bytes)
 * See all the entries for the competition at http://2019.js13kgames.com/
 
+
+## Version 1.1
+
+An improved, post-competition version featuring... 
+
+* visible exhaust particles!
+* zooming with keys or mouse wheel
+* refactoring, reorganization of the code
+* still less than 13k zipped
+
+<a style="display:inline-block; padding:1em; background-color: #f9f9f9;" href="https://deathraygames.github.io/lunar-lander-13k/src/">
+Play the latest version
+</a>
+
 ## Version 1.0 Submission for js13k 2019
 
-Made for js13k competition 2019 over the course of several evenings.
+Made for js13k competition 2019 over the course of just a few evenings. [Rated 106 out of 245 entries](http://js13kgames.com/#winners).
 
-### Play Now
-
-* [v1.0 (13k) on deathraygames.com](https://deathraygames.com/play-online/lunar-lander-13k/js13k/)
-
+* [Play the Original Version v1.0 (13k) on deathraygames.com](https://deathraygames.com/play-online/lunar-lander-13k/js13k/)
 
 ![screenshot of v1](images/return-to-the-moon-400x250.png)
 

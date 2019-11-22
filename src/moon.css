@@ -5,6 +5,14 @@ html, body {
 	color: rgb(162, 169, 169);
 }
 
+a {
+	text-decoration: none;
+	color: rgb(122, 149, 169);
+}
+a:hover {
+	text-decoration: underline;
+}
+
 polygon {
 	stroke-width: 2px;
 	stroke: rgb(192, 199, 199);
@@ -14,8 +22,25 @@ polygon {
 polygon.red {
 	stroke: rgb(192, 60, 60);
 }
+.trail {
+	stroke: rgba(192, 199, 199, 0.5);
+	fill: transparent;
+}
 
-dl {
+h1 {
+	display: inline-block;
+	margin-top: 0;
+}
+.subtitle {
+	opacity: 0.5;
+	margin: 0.4em 0 1em 0;
+	float: right;
+}
+p {
+	line-height: 1.4em;
+}
+
+.info {
 	position: absolute;
 	opacity: 0;
 	top: 1em;
@@ -35,11 +60,11 @@ dt, dd {
 	right: 1em;
 	text-align: right;
 }
-b {
+aside {
 	position: absolute;
 	top: 20%;
 	left: 20%; right: 20%;
-	padding: 1em;
+	padding: 3em;
 	display: none;
 	border: solid 2px rgb(162, 169, 169);
 }

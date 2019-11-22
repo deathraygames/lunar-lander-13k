@@ -1,3 +1,6 @@
+import XY from './XY.js';
+import Polygon from './Polygon.js';
+
 class CompositePolygon {
 	constructor(parts = []) {
 		const s = this;
@@ -51,3 +54,5 @@ class CompositePolygon {
 		return `translate(${x},${y}) rotate(${this.rotation} ${hs.x} ${hs.y})`;
 	}
 }
+
+export default CompositePolygon;

@@ -3,6 +3,7 @@ class Polygon {
 		var p = this;
 		p.arr = arr;
 		p.name = name;
+		p.opacity = 1;
 	}
 
 	forEachPoint(callback) {
@@ -21,3 +22,5 @@ class Polygon {
 		return s;
 	}
 }
+
+export default Polygon;
