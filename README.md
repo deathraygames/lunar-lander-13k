@@ -1,5 +1,5 @@
 # Return to the Moon
-A lunar-lander clone game for js13k
+A lunar-lander-inspired game for js13k
 
 ## JS13k?
 
@@ -16,15 +16,13 @@ An improved, post-competition version featuring...
 * refactoring, reorganization of the code
 * still less than 13k zipped
 
-<a style="display:inline-block; padding:1em; background-color: #f9f9f9;" href="https://deathraygames.github.io/lunar-lander-13k/src/">
-Play the latest version
-</a>
+**[Play the latest version](https://deathraygames.github.io/lunar-lander-13k/src/)**
 
 ## Version 1.0 Submission for js13k 2019
 
 Made for js13k competition 2019 over the course of just a few evenings. [Rated 106 out of 245 entries](http://js13kgames.com/#winners).
 
-* [Play the Original Version v1.0 (13k) on deathraygames.com](https://deathraygames.com/play-online/lunar-lander-13k/js13k/)
+[Play the Original Version v1.0 (13k) on deathraygames.com](https://deathraygames.com/play-online/lunar-lander-13k/js13k/)
 
 ![screenshot of v1](images/return-to-the-moon-400x250.png)
 
